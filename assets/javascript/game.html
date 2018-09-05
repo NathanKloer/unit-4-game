@@ -9,6 +9,13 @@
         <script src="https://code.jquery.com/jquery.js"></script>
     </head>
     <body>
+        <div id="crystal1"></div>
+        <div id="crystal2"></div>
+        <div id="crystal3"></div>
+        <div id="crystal4"></div>
+
+        
+
         <div class="container">
             <div class="jumbotron">
                 <h1 class="text-center">
@@ -16,16 +23,75 @@
                 </h1>
             </div>
         </div>
-        <div class="container">
-            <div class="col-lg-6">
-                <img src="../images/crystal.jpg" alt="" class="img crystal" style="position:absolute; top:50px; left: 80px; z-index: -20; height: 300px">
-            </div>
-            <div class="col-lg-6">
-                <img src="../images/crystal.jpg" alt="" class="img crystal2" style="position:absolute;">
-            </div>
+       
+        <div class="buttons">       
+            <img class="image" id="image1" src="../images/crystal.jpg">
+            <img class="image" id="image2" src="../images/crystal.jpg">
+            <img class="image" id="image3" src="../images/crystal.jpg">
+            <img class="image" id="image4" src="../images/crystal.jpg">
         </div>
-        <script type="text/javascript">
 
+
+        <script type="text/javascript">
+            
+            $(document).ready(function() {
+
+                var random = Math.floor(Math.random()*120+19);
+
+                $("#numberToGet").text(random);
+
+                var num1 = Math.floor(Math.random()*12+1);
+                var num2 = Math.floor(Math.random()*12+1);
+                var num3 = Math.floor(Math.random()*12+1);
+                var num4 = Math.floor(Math.random()*12+1);
+
+                var userTotal= 0;
+                var wins = 0;
+                var losses = 0;
+
+                $("#numberWins").text(wins);
+                $("#numberLosses").text(losses);
+
+                function reset() {
+                    random = Math.floor(Math.random()*102+19);
+                    console.log(random);
+                    $("#numberToGet").text(random);
+                    var num1 = Math.floor(Math.random()*12+1);
+                    var num2 = Math.floor(Math.random()*12+1);
+                    var num3 = Math.floor(Math.random()*12+1);
+                    var num4 = Math.floor(Math.random()*12+1);
+                    userTotal = 0;
+                    $("#score").text(userTotal);
+                }
+
+                function winner() {
+                    alert("You Won!!");
+                    wins++;
+                    $("#numberWins").text(wins);
+                    reset();
+                }
+
+                function loser() {
+                    alert("You Lose!!");
+                    losses++;
+                    $("#numberLosses").text(losses);
+                    reset();
+                }
+
+                $("#crystal").on("click", function() {
+                    userTotal = userTotal + num1;
+                    console.log("New userTotal " + userTotal);
+                    $("#score").text(userTotal);
+
+                    if (userTotal === random) {
+                        winner()
+                }
+
+                else if (userTotal > random) {
+                    loser()
+                } 
+        })
+});
             //four crystals appear on the page
             
 
@@ -35,7 +101,7 @@
             // assigned random values on game start. clicking adds the value to user's scores.
 
 
-            // display score, wins, losses, # of games,
+            
 
         </script> 
     </body>
